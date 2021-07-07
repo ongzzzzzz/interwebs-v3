@@ -1,0 +1,6 @@
+.rainbowText {
+    background: conic-gradient(#EB5757, #F2994A, #F2C94C, #6FCF97, #56CCF2, #BB6BD9);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}

@@ -1,22 +1,44 @@
 import Link from 'next/link'
 
-import styles from './header.module.css'
+import { useState, useEffect } from 'react'
 
-export default function Header({ children }) {
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBars } from '@fortawesome/free-solid-svg-icons'
+
+
+export default function Header({ isMobile }) {
+
+    let [isOpen, toggleHeader] = useState(false);
 
     return (
-        <div className={styles.headerContainer}>
-            <div className={styles.linksContainer}>
-                <Link href="/">
+        <div style={{ height: isMobile ? "fit-content" : "50px", backgroundColor: "#272727" }}
+            className={
+                `w-full text-2xl text-white flex ${isMobile ? "flex-col" : "flex-row-reverse"}`
+            }>
+
+            <div className={
+                isMobile
+                    ? `w-full flex flex-col text-center overflow-hidden transition-all ${isOpen ? "max-h-24" : "max-h-0"}`
+                    : `w-1/2 flex flex-row justify-around items-center`
+            }>
+                <Link href="/"><a>
                     Home
-                </Link>
-                <Link href="/blog">
+                </a></Link>
+                <Link href="/blog"><a>
                     Blog
-                </Link>
-                <Link href="/projects">
+                </a></Link>
+                <Link href="/projects"><a>
                     Projects
-                </Link>
+                </a></Link>
             </div>
+
+            {isMobile &&
+                <FontAwesomeIcon icon={faBars} className="m-5"
+                    onClick={() => toggleHeader(!isOpen)}
+                />
+            }
         </div>
     )
+
+
 }
