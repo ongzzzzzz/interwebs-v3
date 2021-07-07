@@ -12,9 +12,8 @@ export default function Header({ isMobile }) {
 
     return (
         <div style={{ height: isMobile ? "fit-content" : "50px", backgroundColor: "#272727" }}
-            className={
-                `w-full text-2xl text-white flex ${isMobile ? "flex-col" : "flex-row-reverse"}`
-            }>
+            className="w-full text-2xl text-white flex flex-col md:flex-row-reverse"
+        >
 
             <div className={
                 isMobile
@@ -24,10 +23,10 @@ export default function Header({ isMobile }) {
                 <Link href="/"><a>
                     Home
                 </a></Link>
-                <Link href="/blog"><a>
+                <Link href="/wip"><a>
                     Blog
                 </a></Link>
-                <Link href="/projects"><a>
+                <Link href="/wip"><a>
                     Projects
                 </a></Link>
             </div>

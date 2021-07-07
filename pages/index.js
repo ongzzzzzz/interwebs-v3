@@ -27,7 +27,7 @@ export default function Index() {
       <Header isMobile={isMobile} />
 
       <Fade bottom collapse>
-        <Intro isMobile={isMobile} />
+        <Intro />
       </Fade>
 
       {!isMobile && 
@@ -36,7 +36,7 @@ export default function Index() {
 
       <Projects isMobile={isMobile} />
 
-      <Spotify isMobile={isMobile} />
+      <Spotify />
 
       <Footer />
     </div>

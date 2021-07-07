@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { RainbowText } from '../lib/utils'
 import profilePic from '../public/picrew.png'
 
-export default function Intro({ isMobile }) {
+export default function Intro({}) {
 
     return (
         <div className="flex justify-center flex-col text-3xl md:text-5xl text-center relative md:absolute my-8 mx-auto md:ml-24 md:mt-20 w-4/5 md:w-1/3">

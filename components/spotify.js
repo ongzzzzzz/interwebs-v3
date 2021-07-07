@@ -10,7 +10,7 @@ const fetcher = async (...args) => {
     return res.json();
 };
 
-export default function Spotify({ isMobile }) {
+export default function Spotify({}) {
 
     const { data } = useSWR(`/api/spotify`, fetcher, { refreshInterval: 1000 });
 
