@@ -15,6 +15,7 @@
     "@fortawesome/react-fontawesome": "^0.1.14",
     "@n8tb1t/use-scroll-position": "^2.0.3",
     "@react-three/drei": "^7.0.2",
+    "axios": "^0.21.1",
     "next": "11.0.1",
     "node-fetch": "^2.6.1",
     "querystring": "^0.2.1",

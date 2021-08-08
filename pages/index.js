@@ -15,7 +15,7 @@ import { useScrollPercentage } from 'react-scroll-percentage'
 import Fade from 'react-reveal/Fade';
 
 
-export default function Index() {
+export default function Index({ featured }) {
 
   const [scrollRef, scrollPercent] = useScrollPercentage();
 
@@ -30,15 +30,63 @@ export default function Index() {
         <Intro />
       </Fade>
 
-      {!isMobile && 
+      {!isMobile &&
         <Orbits isMobile={isMobile} width={width} percentage={scrollPercent} />
       }
 
-      <Projects isMobile={isMobile} />
+      <Projects isMobile={isMobile} featured={featured} />
 
       <Spotify />
 
       <Footer />
     </div>
   )
+}
+
+
+import axios from "axios";
+
+export async function getStaticProps() {
+  // const res = await fetch('https://firestore.googleapis.com/v1/projects/fogeinator/databases/(default)/documents/projects')
+  // const featured = await res.json()
+  try {
+    let res = await axios.post("https://firestore.googleapis.com/v1/projects/fogeinator/databases/(default)/documents:runQuery", {
+      structuredQuery: {
+        from: [{ collectionId: "projects" }],
+        select: {
+          fields: [
+            { fieldPath: "name" },
+            { fieldPath: "desc" },
+            { fieldPath: "img" },
+          ],
+        },
+        where: {
+          fieldFilter: {
+            field: { fieldPath: "featured" },
+            op: "EQUAL",
+            value: { booleanValue: true },
+          },
+        },
+      },
+    });
+    
+    let featured = res.data.map(doc => {
+      Object.keys(doc.document.fields).forEach(key => {
+        doc.document.fields[key] = doc.document.fields[key].stringValue;
+      })
+      return doc.document.fields;
+    })
+
+    return {
+      props: { featured },
+    }
+  }
+  catch (e) {
+    console.log(e);
+    return {
+      props: { featured: {} },
+    }
+  }
+
+
 }
