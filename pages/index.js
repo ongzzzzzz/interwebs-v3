@@ -47,8 +47,7 @@ export default function Index({ featured }) {
 import axios from "axios";
 
 export async function getStaticProps() {
-  // const res = await fetch('https://firestore.googleapis.com/v1/projects/fogeinator/databases/(default)/documents/projects')
-  // const featured = await res.json()
+  
   try {
     let res = await axios.post("https://firestore.googleapis.com/v1/projects/fogeinator/databases/(default)/documents:runQuery", {
       structuredQuery: {
@@ -58,6 +57,7 @@ export async function getStaticProps() {
             { fieldPath: "name" },
             { fieldPath: "desc" },
             { fieldPath: "img" },
+            { fieldPath: "link" }
           ],
         },
         where: {

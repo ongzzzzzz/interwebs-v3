@@ -2,10 +2,15 @@ import Link from 'next/link'
 
 import Fade from 'react-reveal/Fade';
 
+import styles from './projects.module.css';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons'
+
 
 export default function Projects({ isMobile, featured }) {
 
-    let divStyle = "flex justify-center items-center h-20 w-full rounded-xl bg-gray-400 my-2 md:h-80 md:w-1/3 md:rounded-3xl md:bg-gray-400 md:m-2";
+    let divStyle = "cursor-pointer flex justify-center items-center h-20 w-full rounded-xl bg-gray-400 my-2 md:h-80 md:w-1/3 md:rounded-3xl md:bg-gray-400 md:m-2";
     console.log(featured)
 
     return (
@@ -19,7 +24,15 @@ export default function Projects({ isMobile, featured }) {
                             <div key={featured.indexOf(proj)} className={divStyle}
                                 style={{ backgroundColor: 'transparent', backgroundImage: `url(${proj.img})`, backgroundPosition: 'center center', backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }}
                             >
-                                <h2>{proj.name}</h2>
+                                <div className={styles.projDiv}>
+                                    <div className={isMobile ? "text-base" : "text-6xl"}>
+                                        <a href={proj.link} target="_blank">
+                                            <FontAwesomeIcon icon={faExternalLinkAlt} />
+                                        </a>
+                                    </div>
+                                    <h2 className="text-3xl font-black">{proj.name}</h2>
+                                    {!isMobile && <p>{proj.desc}</p>}
+                                </div>
                             </div>
                         ))
                     }
