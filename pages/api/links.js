@@ -24,8 +24,15 @@ let links = [
         name:"cecamp",
         title:"osman",
         description:"?",
-        public:true,
+        public:false,
         url:"https://perspective.fogeinator.repl.co"
+    },
+    {
+        name:"zom",
+        title:"Zoom Link",
+        description:"侦的吗？",
+        public:false,
+        url:"https://hack.af/z-join?id=u44ure"
     }
 ];
 
