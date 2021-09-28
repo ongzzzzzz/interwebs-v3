@@ -23,7 +23,7 @@ export default function Index({ featured }) {
   let isMobile = width <= 768;
 
   return (
-    <div ref={scrollRef} className="relative bg-black text-white w-full">
+    <div ref={scrollRef} className="relative bg-black text-white w-full min-h-screen">
       <Header isMobile={isMobile} />
 
       <Fade bottom collapse>
