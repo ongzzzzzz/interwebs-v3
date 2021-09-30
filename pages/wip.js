@@ -1,9 +1,6 @@
 import Head from 'next/head'
 
 import Header from '../components/header'
-import Intro from '../components/intro'
-import Orbits from '../components/orbits'
-import Projects from '../components/projects'
 import Spotify from '../components/spotify'
 import Footer from '../components/footer'
 
@@ -28,7 +25,7 @@ export default function WIP() {
 
             <div className="w-full min-h-screen py-32 flex flex-col justify-center items-center">
                 <h1 className="text-3xl">work in progress... 🚦</h1>
-                <Spotify isMobile={isMobile} />
+                <Spotify />
             </div>
 
             <Footer />

@@ -1,0 +1,34 @@
+import PostLayout from '../../components/post-layout'
+export const meta = {
+  title: 'Blog Template',
+  author: 'ongzz',
+  length: '60000',
+  img: '/static/cat-kiss.gif',
+  date: "29-9-2021",
+  blurb: "Template for future blogs",
+  tags: ["misc"]
+}
+
+
+# **Hi!!!** this is a template for my future blogs
+i plan to write devlogs, mathy things i learned, and random stuff along the way *(if im in the mood :D)*
+
+# Here's some math stuff
+Lift($L$) can be determined by Lift Coefficient ($C_L$) like the following equation.
+$$
+L = \frac{1}{2} \rho v^2 S C_L
+$$
+
+# Here's some code stuff
+```js live=true
+const remarkMath = require('remark-math')
+```
+
+# woohoo
+## woohoo
+### woohoo
+#### woohoo
+##### woohoo
+###### woohoo
+
+export default ({ children }) => <PostLayout meta={meta}>{children}</PostLayout>

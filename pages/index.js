@@ -24,7 +24,7 @@ export default function Index({ featured }) {
 
   return (
     <div ref={scrollRef} className="relative bg-black text-white w-full min-h-screen">
-      <Header isMobile={isMobile} />
+      <Header />
 
       <Fade bottom collapse>
         <Intro />

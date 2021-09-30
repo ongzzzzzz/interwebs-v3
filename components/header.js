@@ -1,14 +1,18 @@
 import Link from 'next/link'
 
-import { useState, useEffect } from 'react'
+import { useScreenWidth } from '../lib/utils'
+
+import { useState } from 'react'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 
 
-export default function Header({ isMobile }) {
+export default function Header({ }) {
 
     let [isOpen, toggleHeader] = useState(false);
+    let width = useScreenWidth();
+    let isMobile = width <= 768;
 
     return (
         <div style={{ height: isMobile ? "fit-content" : "50px", backgroundColor: "#272727" }}
@@ -23,7 +27,7 @@ export default function Header({ isMobile }) {
                 <Link href="/"><a>
                     Home
                 </a></Link>
-                <Link href="/wip"><a>
+                <Link href="/blog"><a>
                     Blog
                 </a></Link>
                 <Link href="/wip"><a>
@@ -32,9 +36,11 @@ export default function Header({ isMobile }) {
             </div>
 
             {isMobile &&
-                <FontAwesomeIcon icon={faBars} className="m-5"
-                    onClick={() => toggleHeader(!isOpen)}
-                />
+                <div className="flex flex-row justify-start">
+                    <FontAwesomeIcon icon={faBars} className="m-5 h-5"
+                        onClick={() => toggleHeader(!isOpen)}
+                    />
+                </div>
             }
         </div>
     )
