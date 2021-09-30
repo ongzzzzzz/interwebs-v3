@@ -38,8 +38,10 @@ export default function Blog({ posts }) {
                 <div className="w-full flex flex-row flex-wrap">
                     {tags.map(tag => (
                         <div onClick={() => router.push(`?tag=${tag}`)} key={tag}
-                            className={`rounded-full px-2 py-1 mx-3 my-1 cursor-pointer flex-auto text-center
-                            bg-gradient-to-r from-${currTag == tag? "green" : "blue"}-500 to-${currTag == tag? "green" : "blue"}-700`}
+                            className={currTag == tag 
+                                ? `rounded-full px-2 py-1 mx-3 my-1 cursor-pointer flex-auto text-center bg-gradient-to-r from-green-500 to-green-700`
+                                : `rounded-full px-2 py-1 mx-3 my-1 cursor-pointer flex-auto text-center bg-gradient-to-r from-blue-500 to-blue-700`
+                            }
                         >
                             #{tag}
                         </div>
