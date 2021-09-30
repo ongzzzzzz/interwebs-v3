@@ -22,3 +22,8 @@ html {
   -moz-box-sizing: inherit;
   box-sizing: inherit;
 }
+
+*::selection{
+  background: #222222;
+  color: skyblue;
+}
