@@ -1,0 +1,156 @@
+import PostLayout from '../../components/post-layout'
+export const meta = {
+  title: 'wtf is integration?',
+  author: 'ongzz',
+  length: `${10*60*1000}`,
+  img: '/static/integration/integration-symbol.jpg',
+  date: "30-9-2021",
+  blurb: "integration is usually connotated as the first step towards hard math, but wtf is it?",
+  tags: ["math"]
+}
+export default ({ children }) => <PostLayout meta={meta}>{children}</PostLayout>
+
+# integration
+i think there are 3 types of thoughts that might pop out from hearing this phrase - either:
+- you've taken calculus and are acquainted with the topic
+- you've taken calculus and is still wtf'd by it today
+- what's that never heard of it
+
+this blog post is centered towards the 2nd type of audience, but if you're from the other 2 categories, I hope you get something out of it too! 
+###### Disclaimer: I'm not actually a professional at this, there are so much more smarter people out there lol 
+###### this is my first ever math blog, so I thought I'd write about "integration", which I find particularly neat :3
+
+<br />
+<hr />
+<br />
+
+# ok so how does it look like?
+there are 2 types of integrals - definite and indefinite integrals
+
+![how integrals are written](/static/integration/integrals-notation.png)
+generally, integrals are written with a long and slim "S" sign, with some function inside, and a d**x** after it. the function inside is also called the integrand.
+
+note the d**x**: it indicates that it's an integral with respect to **x**
+###### why do we specify **x**? when there are multiple variables, it's necessary to identify which integral is which (especially when doing double/triple integrals)
+
+the difference between definite and indefinite integrals, notation wise, are the bounds of integration. they're the numbers that sit below and on top of the integral sign
+
+also, 
+- indefinite integrals evaluate to a function +C, while
+- definite integrals evaluate to a number
+
+we will see how to evaluate both indefinite and definite integrals later, but for now: kids and water 👶💧
+
+<br />
+<hr />
+<br />
+
+# kids and water 👶💧
+imagine a child, playing with a water tap. they keep turning it on and off following a pattern, changing the amount of water flowing through the pipe. 
+as an individual concerned about water conservation, you decide to put a bucket beneath the water tap. 
+
+![tap with changing flow rate](/static/integration/tap.gif)
+
+as an example, let's say the water tap's flow rate follows the function $r(t) = 1+\cos(t)$
+
+<iframe src="https://www.desmos.com/calculator/q35ui6bjoz" width="100%"/>
+
+**question:** if you know how the child is playing with the tap (their pattern), how can we find out how much water is collected in the bucket?
+
+we could look at a simpler example first - assume that the flow rate WAS constant. then, the volume in the bucket would be $V = r \times t$, where $r$ is the flow rate and $t$ is the time. On a graph, it would look something like this:
+![constant rate graph](/static/integration/rate-area.png)
+notice how the volume, in the end, is just the area under the graph!
+
+we could also look at another example, where the flow rate is not constant - let's say 
+
+$$
+r(t) = \left\{
+\begin{array}{ll}
+  t & 0 \leq x \leq 4 \\
+  8-t & 4 \lt x \leq 8 \\
+\end{array} 
+\right.
+$$
+<iframe src="https://www.desmos.com/calculator/oasryu1kh2" width="100%"/>
+
+using the same principle as before, the total volume would be the area under the graph again, in this case $2\times\frac{1}{2}(4)(4) = 16$, by the formula for the area of a triangle.
+
+so yea, that's great, but that doesn't help the child save water at all! how do we find the area under the curve of $1+cos(t)$ ?
+
+some smart people proposed that we approximate the area instead. maybe we could use a bunch of small rectangles to find the area under the curve!
+
+for example, let's say the child stopped the water flow at $t=2\pi$ . we could find the area under this region using some rectangles, aligning each rectangle's top left corner on the curve:
+![left riemann sum](/static/integration/lrs.png)
+
+this is called a **Riemann Sum** - basically, it splits the range from $0$ to $2\pi$ into $n$ small segments, and calculates the area of each rectangle beforing summing them all up. this approach is not very accurate for small $n$, but as $n$ tends to $\infty$ (infinitely small segments of rectangles), the area will eventually be equal to the area under the curve!
+###### actually, this diagram shows a **Left Riemann Sum** - if you wanna learn more, [click here to go to Khan Academy](https://www.khanacademy.org/math/ap-calculus-ab/ab-integration-new/ab-6-2/v/simple-riemann-approximation-using-rectangles)!
+
+you can play around with the idea using this desmos graph:
+<iframe src="https://www.desmos.com/calculator/ki8wbhantr" width="100%" height="300"/>
+
+
+what we actually did was integration! (well, riemann sums are just an approximation, but still.)
+
+so that's it! to recap what we did, we found the area under the flow-rate-curve, which is approximately $6.28318530718...$ (as seen in the desmos graph)
+
+there is actually another way of going about this - if we know the volume of water at time $t$ , then isn't its derivative the flow rate of the tap? that means that **Integration is just Reversed Differentiation!**
+
+yes - just like how addition is the opposite of subtraction, integration is the opposite of differentiation! this fact actually has a name, and is called [the Fundamental Theorem of Calculus](https://www.khanacademy.org/math/in-in-grade-12-ncert/xd340c21e718214c5:definite-integrals/xd340c21e718214c5:fundamental-theorem-of-calculus/v/fundamental-theorem-of-calculus)
+
+$$
+  \frac{d}{dx} \int^{x}_{0} r(t)dt = r(x)
+$$
+putting it in human language: the derivative of an integral of a function is the function itself :P 
+
+##### spoilers: derivatives ahead!! if you're not too familiar with the topic, I advise you to [check out](https://www.mathsisfun.com/calculus/derivatives-introduction.html)
+
+<br />
+<hr />
+<br />
+
+# integration as reversed differentiation
+as we've seen just now, integration is just reversed differentiation - that means that, for the kid playing with water tap question, if we had a function representing the water in the bucket, its derivative must be $1+\cos(t)$ .
+
+recall that:
+$$
+\frac{d}{dx} x = 1 ~~ \text{ and } ~~ \frac{d}{dx} \sin(x) = \cos(x)
+$$
+
+hence, the function for the water in the bucket at time $t$ must be:
+$$
+\int 1+\cos(x) dx = x + \sin(x) + C
+$$
+
+wait but where did that $+C$ come from?? 
+because we're finding an **indefinite** integral, every function must have a $+C$ at the end - this is because the derivative of a constant is $0$ , and so every time we take a derivative we lose information about this constant term. 
+then, whenever we do "reverse differentiation", we must remember to include a constant term to correctly describe the function.
+###### how do we find the $C$ then? we can find it using known values of the function - eg. if the bucket was initially empty, then $C$ would be 0; likewise, if the bucket used to collect the kid's water had 500mL of water in it, then $C$ would be 500 and so on.
+
+<br />
+<hr />
+<br />
+
+# additional resources
+in this problem, we were lucky, because $1+\cos(t)$ was an easy derivative. what if we had more complicated integrands? for example:
+$$
+\int^{\pi}_{0} \sqrt{1-\sin(x)} dx
+$$
+$$
+\int^{\infty}_{0} \arcsin(e^{-x}) dx
+$$
+$$
+\int^{1}_{0} \frac{x^2-1}{\ln(x)} dx
+$$
+
+yes, i'll admit - these actually look freakin' scary, but they actually have very nice answers! as long as you use the right integration trick, they turn out pretty nicely.
+
+for readers wanting more: you can solve those 3 by using: 
+1. [u-substitution](https://www.khanacademy.org/math/ap-calculus-ab/ab-integration-new/ab-6-9/a/review-applying-u-substitution)
+2. [integration by parts](https://www.khanacademy.org/math/ap-calculus-bc/bc-integration-new/bc-6-11/v/deriving-integration-by-parts-formula)
+3. [Feynman's trick](https://youtu.be/4RIHTHYD2SQ?t=529) ;)
+
+i'm still learning the topic, but i've found a book that's particularly useful for me, namely [Advanced Calculus Explored: With Applications in Physics, Chemistry, and Beyond by Hamza Alsamraee](https://www.amazon.com/Advanced-Calculus-Explored-Applications-Chemistry-ebook/dp/B08249GVH2) - so do check it out if you're interested as well :3
+
+anyways, hope you learned something from reading, and have a nice day <3
+###### feel free to contact me if you have any questions!!! (check the footer if u wanna uwu)
+

@@ -43,7 +43,7 @@ export default function PostLayout({ children, meta }) {
                         <div className="flex flex-row justify-center items-center">
                             <span><FontAwesomeIcon icon={faUserCircle} className="h-5 mx-1" /></span>
                             <span>by {meta.author}</span>
-                            <span className="text-gray-400 mx-2"><i>({humanizeDuration(meta.length)} read)</i></span>
+                            <span className="text-gray-400 mx-2"><i>({humanizeDuration(meta.length).replace("minutes", "minute")} read)</i></span>
                         </div>
                     </div>
                 </div>

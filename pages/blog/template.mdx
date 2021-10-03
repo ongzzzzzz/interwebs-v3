@@ -6,8 +6,9 @@ export const meta = {
   img: '/static/cat-kiss.gif',
   date: "29-9-2021",
   blurb: "Template for future blogs",
-  tags: ["misc"]
+  tags: ["misc", "math", "science", "devlog"]
 }
+export default ({ children }) => <PostLayout meta={meta}>{children}</PostLayout>
 
 
 # **Hi!!!** this is a template for my future blogs
@@ -30,5 +31,3 @@ const remarkMath = require('remark-math')
 #### woohoo
 ##### woohoo
 ###### woohoo
-
-export default ({ children }) => <PostLayout meta={meta}>{children}</PostLayout>
