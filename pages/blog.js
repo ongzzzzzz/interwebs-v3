@@ -69,7 +69,7 @@ export default function Blog({ posts }) {
                             </p>
                         </div>
                         <div className="w-1/3 rounded-r-lg bg-gray-400"
-                            style={{ background: `#fff url('${post.img}') no-repeat right center`, backgroundSize: "cover" }}
+                            style={{ background: `#fff url('${post.img}') no-repeat center`, backgroundSize: "cover" }}
                         >
                         </div>
                     </div>
