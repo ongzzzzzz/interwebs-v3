@@ -86,7 +86,7 @@ export default function Blog({ posts }) {
 export async function getStaticProps(ctx) {
     const path = require('path')
     const fs = require('fs')
-    // const { db } = require('../lib/firebaseAdmin')
+    const { db } = require('../lib/firebaseAdmin')
 
 
     let blogPath = path.join(process.cwd(), "pages/blog")
