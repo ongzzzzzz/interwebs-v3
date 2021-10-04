@@ -23,10 +23,14 @@ const components = {
   ol: (({ children }) => <ol className="list-decimal my-2">{children}</ol>),
 };
 
+import { DefaultSeo } from 'next-seo';
+import SEO from '../next-seo.config'
+
 export default function App({ Component, pageProps }) {
   return (
     <>
       <MDXProvider components={components}>
+        <DefaultSeo {...SEO}/>
         <Component {...pageProps} />
       </MDXProvider>
     </>
