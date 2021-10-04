@@ -115,6 +115,7 @@ export async function getStaticProps(ctx) {
         props: {
             posts: postDatas
         },
-        revalidate: 1
+        revalidate: 1,
+        fallback: false
     }
 }
