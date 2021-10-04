@@ -1,7 +1,9 @@
 export default {
     title: 'ongzz',
+    description: "ongzz's personal website",
     openGraph: {
         title: 'ongzz',
+        description: "ongzz's personal website",
         type: 'website',
         locale: 'en_IE',
         url: 'https://ongzz.ml/',
