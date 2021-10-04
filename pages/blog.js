@@ -116,6 +116,5 @@ export async function getStaticProps(ctx) {
             posts: postDatas
         },
         revalidate: 1,
-        fallback: false
     }
 }
