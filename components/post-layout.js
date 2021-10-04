@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
+import { useState, useEffect } from 'react'
 import humanizeDuration from 'humanize-duration'
 
 import Header from './header'
@@ -12,6 +13,16 @@ import { faUserCircle } from '@fortawesome/free-regular-svg-icons'
 
 export default function PostLayout({ children, meta }) {
     const router = useRouter();
+
+    let [views, setViews] = useState(0);
+
+    useEffect(() => {
+        let blogName = router.pathname.replace('/blog/', '')
+        fetch(`/api/views/${encodeURIComponent(blogName)}`).then(async res => {
+            let data = await res.json()
+            setViews(data.views)
+        })
+    }, [])
 
     return (
         <div>
@@ -40,11 +51,16 @@ export default function PostLayout({ children, meta }) {
                     </div>
                     <div style={{ width: "100%" }}>
                         <h1 className="text-4xl text-center font-bold">{meta.title}</h1>
-                        <div className="flex flex-row justify-center items-center">
+
+                        <div className="flex flex-row justify-center items-center text-sm md:text-base">
                             <span><FontAwesomeIcon icon={faUserCircle} className="h-5 mx-1" /></span>
                             <span>by {meta.author}</span>
-                            <span className="text-gray-400 mx-2"><i>({humanizeDuration(meta.length).replace("minutes", "minute")} read)</i></span>
+                            <span className="text-gray-400 mx-2">
+                                <i>({humanizeDuration(meta.length).replace("minutes", "minute")} read · {views} views)
+                                </i>
+                            </span>
                         </div>
+
                     </div>
                 </div>
                 {children}
