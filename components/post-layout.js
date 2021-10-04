@@ -10,7 +10,7 @@ import Footer from './footer'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserCircle } from '@fortawesome/free-regular-svg-icons'
 
-import { NextSeo } from 'next-seo';
+import { NextSeo, BlogJsonLd } from 'next-seo';
 
 export default function PostLayout({ children, meta }) {
     const router = useRouter();
@@ -25,9 +25,13 @@ export default function PostLayout({ children, meta }) {
         })
     }, [])
 
-    let dateStr = meta.date.split("-")
-    [dateStr[0], dateStr[1]] = [dateStr[1], dateStr[0]]
-    dateStr = dateStr.join('/')
+    // function parseDate(str) {
+    //     // 30-09-2021 ==> 09/30/2021
+    //     let dateStr = str.split("-")
+    //     [dateStr[0], dateStr[1]] = [dateStr[1], dateStr[0]]
+    //     dateStr = dateStr.join('/')
+    //     return dateStr
+    // }
 
     return (
         <div>
@@ -45,20 +49,24 @@ export default function PostLayout({ children, meta }) {
                     crossOrigin="anonymous"
                 />
             </Head>
-            <NextSeo 
+
+            <NextSeo
                 title={meta.title} description={meta.blurb}
                 openGraph={{
                     url: `https://ongzz.ml${router.pathname}`,
                     title: meta.title, description: meta.blurb, site_name: 'ongzz',
                     images: [{ alt: meta.title, url: `https://ongzz.ml${meta.img}` }],
-                    type: 'article',
-                    article: {
-                        publishedTime: new Date(dateStr).toISOString(),
-                        authors: ['https://ongzz.ml/'],
-                        tags: meta.tags
-                    }
+                    type: 'article', article: { tags: meta.tags }
                 }}
             />
+            <BlogJsonLd
+                url={`https://ongzz.ml${router.pathname}`}
+                title={meta.title}
+                images={[ `https://ongzz.ml${meta.img}` ]}
+                authorName={meta.author}
+                description={meta.blurb}
+            />
+
             <Header />
             <div className="relative bg-black text-white w-full min-h-screen overflow-x-hidden px-5 pb-10 md:px-72">
                 <p onClick={() => router.push('/blog')}
