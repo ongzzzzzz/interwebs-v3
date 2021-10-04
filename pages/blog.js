@@ -92,28 +92,28 @@ export async function getStaticProps(ctx) {
     let blogPath = path.join(process.cwd(), "pages/blog")
 
     let _postDatas = fs.readdirSync(blogPath).map(blog => {
-        return { path: blog.split('.')[0], ...require(`./blog/${blog}`).meta }
+        return { path: blog.split('.')[0], ...require(`./blog/${blog}`).meta, views: 0 }
     })
 
-    let postDatas = [];
-    for (const post of _postDatas) {
-        let doc = await db.collection('blogs').doc(post.path).get()
-        if (doc.exists) {
-            let data = doc.data()
-            postDatas.push({ ...post, views: data.views, likes: data.likes })
-        }
-        else {
-            db.collection('blogs').doc(post.path).set({
-                views: 0,
-                likes: 0
-            })
-            postDatas.push({ ...post, views: 0, likes: 0 })
-        }
-    }
+    // let postDatas = [];
+    // for (const post of _postDatas) {
+    //     let doc = await db.collection('blogs').doc(post.path).get()
+    //     if (doc.exists) {
+    //         let data = doc.data()
+    //         postDatas.push({ ...post, views: data.views, likes: data.likes })
+    //     }
+    //     else {
+    //         db.collection('blogs').doc(post.path).set({
+    //             views: 0,
+    //             likes: 0
+    //         })
+    //         postDatas.push({ ...post, views: 0, likes: 0 })
+    //     }
+    // }
 
     return {
         props: {
-            posts: postDatas
+            posts: _postDatas
         },
         revalidate: 1,
     }
