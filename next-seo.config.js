@@ -6,7 +6,7 @@ export default {
         locale: 'en_IE',
         url: 'https://ongzz.ml/',
         site_name: 'ongzz',
-        images: [{ url: 'https://ongzz.ml/picrew.png' }]
+        images: [{ url: 'https://ongzz.ml/index.png' }]
     },
     twitter: {
         handle: '@ongzzzzzz',
