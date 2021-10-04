@@ -5,7 +5,6 @@ export default {
         title: 'ongzz',
         description: "ongzz's personal website",
         type: 'website',
-        locale: 'en_IE',
         url: 'https://ongzz.ml/',
         site_name: 'ongzz',
         images: [{ url: 'https://ongzz.ml/index.png' }]

@@ -22,6 +22,18 @@ export default function Blog({ posts }) {
 
     return (
         <div>
+            <NextSeo 
+                title="ongzz's blog"
+                description="a list of writings: some stuff from ongzz's mind"
+                openGraph={{
+                    title: "ongzz's blog",
+                    description: "a list of writings: some stuff from ongzz's mind",
+                    type: 'website',
+                    url: 'https://ongzz.ml/blog', site_name: 'ongzz',
+                    images: [{ url: 'https://ongzz.ml/index.png' }]
+                }}
+                twitter={{ handle: '@ongzzzzzz', site: '@ongzzzzzz', cardType: 'summary_large_image' }}
+            />
             <Header />
             <div className="relative bg-black text-white w-full min-h-screen overflow-x-hidden px-5 md:px-72">
                 <div className="flex flex-col items-center my-5">
