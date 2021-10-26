@@ -6,15 +6,27 @@ export default async (req, res) => {
     try {
         let { post } = req.query;
         post = decodeURIComponent(post)
-        let postData = (await db.collection('blogs').doc(post).get()).data();
+        let doc = await db.collection('blogs').doc(post).get();
 
-        db.collection('blogs').doc(post).update({
+        if (!doc.exists) {
+            db.collection('blogs').doc(post).set({
+                views: 0, likes: 0
+            })
+            res.status(200).json({ views: 0, likes: 0 })
+            return;
+        } 
+
+        let postData = doc.data();
+        db.collection('blogs').doc(post).set({
             views: firebaseAdmin.firestore.FieldValue.increment(1)
-        }).then(() => {
+        }, {merge: true}).then(() => {
             res.status(200).json({ views: postData.views+1, likes: postData.likes })
         })
+        return;
+        
     } catch (e) {
         console.error(e)
         res.status(400).json({ e });
+        return;
     }
 }

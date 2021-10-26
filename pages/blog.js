@@ -124,6 +124,15 @@ export async function getStaticProps(ctx) {
         }
     }
 
+    // 29-09-2021 ==> 09-29-2021
+    const swapMonthDate = (d) => new Date([d.split("-")[1], d.split("-")[0], ...d.split("-").splice(2)].join("-")).getTime()
+
+    postDatas.sort((a, b) => {
+        let d_a = swapMonthDate(a.date);
+        let d_b = swapMonthDate(b.date);
+        return (d_a < d_b ? 1 : (d_a > d_b ? -1 : 0))
+    })
+
     return {
         props: {
             posts: postDatas
