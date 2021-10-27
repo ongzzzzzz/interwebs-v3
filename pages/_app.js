@@ -1,4 +1,5 @@
 import '../styles/globals.css'
+import Image from 'next/image'
 
 import firebase from '../lib/firebase'
 
@@ -12,9 +13,10 @@ config.autoAddCss = false; /* eslint-disable import/first */
 import { MDXProvider } from "@mdx-js/react";
 const components = {
   p: (({ children }) => <p className="my-2">{children}</p>),
-  a: (({ href, children }) => <a href={href} target="_blank" className="underline">{children}</a>),
-  h1: (({ children }) => <h1 className="font-bold my-2 underline text-2xl">{children}</h1>),
-  h2: (({ children }) => <h2 className="font-bold my-2 text-xl">{children}</h2>),
+  a: (({ href, children }) => <a href={href} target="_blank" className="underline hover:text-blue-400">{children}</a>),
+  img: (({ src, children }) => <img src={src} className="mx-auto my-2"/>),
+  h1: (({ children }) => <h1 className="font-bold mt-8 underline text-3xl">{children}</h1>),
+  h2: (({ children }) => <h2 className="font-bold my-2 underline text-xl">{children}</h2>),
   h3: (({ children }) => <h3 className="font-bold my-2 text-lg">{children}</h3>),
   h4: (({ children }) => <h4 className="font-bold my-2 text-base">{children}</h4>),
   h5: (({ children }) => <h5 className="font-bold my-2 text-sm">{children}</h5>),
