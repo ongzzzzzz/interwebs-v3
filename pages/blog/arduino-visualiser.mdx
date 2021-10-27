@@ -85,22 +85,6 @@ void loop() {
 i hooked up an Arduino UNO and a MAX9814 mic module to test it out, and it worked smoothly 😎
 ![mic setup](/static/arduino-visualiser/mic.jpg)
 
-![serial plotter graph](/static/arduino-visualiser/com.png)
-there was a huge spike around the 0th and 1st datapoint though, so i just set them equal to 0:
-```arduino
-/*FFT*/
-FFT.Windowing(vReal, SAMPLES, FFT_WIN_TYP_HAMMING, FFT_FORWARD);
-FFT.Compute(vReal, vImag, SAMPLES, FFT_FORWARD);
-FFT.ComplexToMagnitude(vReal, vImag, SAMPLES);
-double peak = FFT.MajorPeak(vReal, SAMPLES, SAMPLING_FREQUENCY);
-
-/*PRINT RESULTS*/
-//Serial.println(peak);     //Print out what frequency is the most dominant.
-
-vReal[0] = 0; // idk why these are here but i'll just
-vReal[1] = 0; // remove these spikes for now
-```
-
 the blog post highlights some key stuff about FFT:
 - sampling frequency
 - number of samples
@@ -134,6 +118,23 @@ bins are just the result of the FFT, and represents 1 element of the resulting a
 here's a diagram explaning what each FFT outputs:
 ![diagram](/static/arduino-visualiser/diagram.png)
 
+![serial plotter graph](/static/arduino-visualiser/com.png)
+there was a huge spike around the 0th and 1st datapoint though, so i just set them equal to 0:
+```arduino
+/*FFT*/
+FFT.Windowing(vReal, SAMPLES, FFT_WIN_TYP_HAMMING, FFT_FORWARD);
+FFT.Compute(vReal, vImag, SAMPLES, FFT_FORWARD);
+FFT.ComplexToMagnitude(vReal, vImag, SAMPLES);
+double peak = FFT.MajorPeak(vReal, SAMPLES, SAMPLING_FREQUENCY);
+
+/*PRINT RESULTS*/
+//Serial.println(peak);     //Print out what frequency is the most dominant.
+
+vReal[0] = 0; // idk why these are here but i'll just
+vReal[1] = 0; // remove these spikes for now
+```
+
+Norwegian Creations has another [follow-up blog post](https://www.norwegiancreations.com/2019/03/arduino-fft-pt-2-improving-the-hardware-for-real-time-analysis/) too, which i recommend checking out 👀
 # adding a display
 since it ran smoothly now, my next step was to attach a display to show the detected frequencies - i had a spare 128x32 OLED lying around, so i thought this was the perfect project to use it in.
 ![128x32 OLED](/static/arduino-visualiser/128x32.jpg)
