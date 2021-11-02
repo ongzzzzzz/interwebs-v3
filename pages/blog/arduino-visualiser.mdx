@@ -3,7 +3,7 @@ export const meta = {
   title: 'Arduino Visualizer',
   author: 'ongzz',
   length: `${10*60*1000}`,
-  img: '/static/arduino-visualiser/fft.png',
+  img: '/static/arduino-visualiser/exterior.jpg',
   date: "27-10-2021",
   blurb: "making a sussy audio visualiser for arduino",
   tags: ["devlog"]
@@ -22,6 +22,7 @@ actually, i've watched [3b1b's video](https://www.youtube.com/watch?v=spUNpyF58B
 the fourier transform videos from SoME rekindled the project in my heart, and with some time to spare, i thought why not start a new side project? so i started looking into FFT algorithms, and realised that the same problem has ben solved by many people in the past, so i decided to use the [arduinoFFT](https://github.com/kosme/arduinoFFT/) library for it instead. 
 
 i won't be going into how the algorithm works (definitely not because idk how it works), but there are a lot of useful resources online ([SoME playlist here](https://www.youtube.com/playlist?list=PLnQX-jgAF5pTkwtUuVpqS5tuWmJ-6ZM-Z))
+![fft illustration](/static/arduino-visualiser/fft.png)
 
 # starting grounds
 during my discovery, i found [this blog tutorial by Norwegian Creations](https://www.norwegiancreations.com/2017/08/what-is-fft-and-how-can-you-implement-it-on-an-arduino/), which had some code to analyze frequencies from a signal generator, so i copied it over and used that as my starting point.
@@ -425,11 +426,43 @@ void hslToRgb(double h, double s, double l, byte rgb[]) {
 ```
 ![test](/static/arduino-visualiser/test.gif)
 
+# adding more stuff
+the project's almost done now - but i think there was room for improvement, so i went ahead and added:
+- WS2812B LED Strip Output (just a programmable LED strip)
+- power source (DC-DC stepdown)
+
+the reason I added the LED Strip was because the colors were pretty 😳 but also because i had a LED strip lying around. 
+as for the power source, it was to power the project even without power from the laptop :P 
+
+final schematic:
+![schematic](/static/arduino=visualiser/schematic.png)
+
 # the enclosure
-the project's almost done now: the thing i need next is an enclosure for the project.
+it works now! but it looks terrible!!! after some thought, i decided to go with a sussy crewmate model - the LED would pop up on its head and an OLED on its glasses would display which frequency it's hearing.
+after some designing, i came up with this 3d model:
+![side1](/static/arduino-visualiser/side1.png)
+![side2](/static/arduino-visualiser/side2.png)
 
-i decided to go with a sussy crewmate model - the LED would pop up on its head 
+unfortunately i had to switch to a smaller device, because the UNO could not fit :0
 
-unfortunately i had to switch to an Arduino Pro Mini :0
+i settled on a NodeMCU, because not only is it smaller but also has better specs too (80MHz clock speed, ~80kb) compared to the Arduino UNO (16MHz, ~2kb)
 
-*to be continued*
+# the assembly
+it seemed easier than it was 🥵 i spent about an afternoon soldering and putting the pieces together, and this was how it turned out:
+![exterior](/static/arduino-visualiser/exterior.jpg)
+
+this is how it looks inside:
+![interior](/static/arduino-visualiser/interior.jpg)
+
+demo gif:
+![demo](/static/arduino-visualiser/demo.gif)
+
+# footnote
+this blog's getting kinda long, and i'm getting kinda tired too after all that soldering 🥴
+
+the code / 3d model can be found over at my github: https://github.com/Fogeinator/sussy-lamp
+i'll keep updating the code though (since im using nodemcu, i'm adding OTA support :P)
+
+should i write a tutorial blog post for people who want to build this project? let me know on discord/twitter/anywhere I am! i would love to hear any feeedback :3
+
+thanks for reading! 💖
