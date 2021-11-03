@@ -140,7 +140,7 @@ Norwegian Creations has another [follow-up blog post](https://www.norwegiancreat
 since it ran smoothly now, my next step was to attach a display to show the detected frequencies - i had a spare 128x32 OLED lying around, so i thought this was the perfect project to use it in.
 ![128x32 OLED](/static/arduino-visualiser/128x32.jpg)
 
-after some copy-pasting from Adafruit's official website, i got the thing to display frequencies:
+after some tinkering (copy-pasting), i got the thing to display frequencies:
 (i changed the samples to 64 because of memory issues + set the delay to 1ms)
 ```arduino
 // -------------------- FFT SETUP --------------------
@@ -254,10 +254,10 @@ String findFrequency(float freq) {
 ```
 it loops through an array of frequencies and their notes, and matches the current frequency to the nearest one.
 
-# connecting an RGB
+# connecting an RGB LED
 after being able to have frequency and note data available, the next step was to make it go bling bling ✨ 
 
-i connected an RGB LED (with common anode) to the arduino (pins: R=>6, G=>5, B=>3), but ironically enough i decided against mapping values to the RGB color scheme.
+i connected an RGB LED (with common anode) to the arduino (pins: R=>6, G=>5, B=>3), but ironically enough i decided against mapping frequency values to the RGB color scheme.
 
 the reason for this is because HSL is much more suited for this applciation, imo. i wanted to map the frequency range from (C to B), to a continuous color scale, and that's what HSL can provide using the color wheel.
 
@@ -427,28 +427,42 @@ void hslToRgb(double h, double s, double l, byte rgb[]) {
 ![test](/static/arduino-visualiser/test.gif)
 
 # adding more stuff
-the project's almost done now - but i think there was room for improvement, so i went ahead and added:
-- WS2812B LED Strip Output (just a programmable LED strip)
-- power source (DC-DC stepdown)
+the project's almost done now - but i think there was room for improvement.
 
-the reason I added the LED Strip was because the colors were pretty 😳 but also because i had a LED strip lying around. 
-as for the power source, it was to power the project even without power from the laptop :P 
+although one RGB LED is easy to work with, but maybe not the prettiest 👀 because I had a WS2812B LED strip lying around, i decided to use that in addition to the RGB LED. i won't talk about how i programmed them though, but the code would be availlable on my github :3
+![led strip](/static/arduino-visualiser/led-strip.jpg)
 
-final schematic:
-![schematic](/static/arduino=visualiser/schematic.png)
+i also wanted the project to be portable, like a mini lamp - so i had to add a power source too. i went with a micro USB port and a barrel jack, connected to a 5V DC-DC stepdown to provide stable 5V to the project.
+
+the final schematic looked like this:
+![schematic](/static/arduino-visualiser/schematic.png)
 
 # the enclosure
-it works now! but it looks terrible!!! after some thought, i decided to go with a sussy crewmate model - the LED would pop up on its head and an OLED on its glasses would display which frequency it's hearing.
-after some designing, i came up with this 3d model:
+so it works now but it looks terrible!!! everything just lives on my breadboard. 
+
+after some thought, i decided to go with a sussy crewmate model, because why not - the LED would pop up on its head and an OLED on its glasses would display which frequency it's currently hearing.
+
+i came up with this 3d model to be printed:
 ![side1](/static/arduino-visualiser/side1.png)
 ![side2](/static/arduino-visualiser/side2.png)
 
-unfortunately i had to switch to a smaller device, because the UNO could not fit :0
-
-i settled on a NodeMCU, because not only is it smaller but also has better specs too (80MHz clock speed, ~80kb) compared to the Arduino UNO (16MHz, ~2kb)
+unfortunately i had to switch to a smaller microcontroller, because the UNO could not fit in this enclosure. i settled on a NodeMCU, because not only is it smaller but also has better specs too (80MHz clock speed, ~80kb) compared to the Arduino UNO (16MHz, ~2kb)
+![nodemcu](/static/arduino-visualiser/nodemcu.jpg)
 
 # the assembly
-it seemed easier than it was 🥵 i spent about an afternoon soldering and putting the pieces together, and this was how it turned out:
+in theory, i would have just soldered everything using wires and fitted them nicely into the enclosure, and the project would have been completed. 
+
+but i was too naive 😭
+
+i realised i had the power hole too small, and I had to sand it down to make the opening bigger so i could put both the microusb and barrel jack together. 
+
+also, due to my lack of forseeing the actual project assembly, it was very hard to fit the project together - the body was one rigid shell, and getting all the components in all of their right places took a lot of patience and sanity from me.
+
+not only that, when i was soldering the project together, i cut some corners and used very short wires. don't be like me. use longer wires. you'll thank yourself later.
+
+and my last shortcoming was my stupidity. i thought i didn't need mounting holes because hot glue would do the trick, but it didn't work out the way i expected it. the OLED display was stressful to attach with hot glue, and so were the barrel jack and micro usb. 
+
+nevertheless, i overcame all these difficulties in the end. it took about an afternoon of soldering and hot glueing, and i was satisfied with how it turned out:
 ![exterior](/static/arduino-visualiser/exterior.jpg)
 
 this is how it looks inside:
@@ -458,11 +472,20 @@ demo gif:
 ![demo](/static/arduino-visualiser/demo.gif)
 
 # footnote
-this blog's getting kinda long, and i'm getting kinda tired too after all that soldering 🥴
+even though it wasn't perfect, i learned a lot while making this project. after all, nothing's perfect anyways 😎 
 
-the code / 3d model can be found over at my github: https://github.com/Fogeinator/sussy-lamp
-i'll keep updating the code though (since im using nodemcu, i'm adding OTA support :P)
+things i've learned
+- think every detail through (yes it looks good, but is it a practical thing to add/remove?)
+- add mounting holes next time
+- once you have an idea, don't sit on it for too long or you'll forget about it and lose novelty
 
-should i write a tutorial blog post for people who want to build this project? let me know on discord/twitter/anywhere I am! i would love to hear any feeedback :3
+the code / edited 3d model can be found over at my github: https://github.com/Fogeinator/sussy-lamp
 
-thanks for reading! 💖
+i'll keep updating the code though. i'll be adding more LED strip patterns, and since im using nodemcu, i'll add OTA support too.
+(OTA = over the air, basically wireless code uploading)
+
+anyways, this was my first devlog blog post. it's not meant to be a guide for those who want to build along, but rather a personal diary so i can reflect back on my dumbness in the future.
+
+should i write a tutorial blog post for people who actually want to build this project? what would you like to see next? let me know on discord/twitter/anywhere I am! i would love to hear any feeedback :3
+
+that's all for now, thanks for reading! 💖
