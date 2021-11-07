@@ -21,7 +21,7 @@ export default function Projects({ featured }) {
                         featured.slice(0, 3).map(proj => (
                             <div key={featured.indexOf(proj)} 
                                 onClick={() => window.open(proj.link, '_blank')}
-                                className="cursor-pointer flex justify-center items-center h-20 w-full rounded-xl bg-gray-400 my-2 md:h-80 md:w-1/3 md:rounded-3xl md:bg-gray-400 md:m-2"
+                                className="cursor-pointer flex justify-center items-center h-20 w-full rounded-xl bg-gray-400 my-2 md:h-80 md:w-1/3 md:rounded-3xl md:bg-gray-400 md:m-2 text-white hover:text-blue-500"
                                 style={{ backgroundColor: 'transparent', backgroundImage: `url(${proj.img})`, backgroundPosition: 'center center', backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }}
                             >
                                 <div className={styles.projDiv}>
