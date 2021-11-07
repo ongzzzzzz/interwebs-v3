@@ -17,7 +17,7 @@ export default function Spotify({ }) {
     if (data) {
 
         return (
-            <div className={`relative mx-auto mb-4 md:m-0 md:absolute md:w-1/3 md:left-0 md:bottom-20 w-4/5 flex flex-row justify-center md:justify-evenly items-center`}>
+            <div className={`relative mx-auto mb-4 md:m-0 md:absolute md:w-1/3 md:left-0 md:bottom-24 w-4/5 flex flex-row justify-center md:justify-evenly items-center`}>
 
                 <img className="rounded-full w-16 md:w-1/4 h-auto mr-2 md:mr-0"
                     alt="Spotify Album Cover"

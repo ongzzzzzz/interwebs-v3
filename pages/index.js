@@ -2,6 +2,7 @@ import Head from 'next/head'
 
 import Header from '../components/header'
 import Intro from '../components/intro'
+import Blog from '../components/blog'
 import Orbits from '../components/orbits'
 import Projects from '../components/projects'
 import Spotify from '../components/spotify'
@@ -15,7 +16,7 @@ import { useScrollPercentage } from 'react-scroll-percentage'
 import Fade from 'react-reveal/Fade';
 
 
-export default function Index({ featured }) {
+export default function Index({ featured, posts }) {
 
   const [scrollRef, scrollPercent] = useScrollPercentage();
 
@@ -34,7 +35,9 @@ export default function Index({ featured }) {
         <Orbits isMobile={isMobile} width={width} percentage={scrollPercent} />
       }
 
-      <Projects isMobile={isMobile} featured={featured} />
+      <Blog posts={posts}/>
+
+      <Projects featured={featured} />
 
       <Spotify />
 
@@ -47,8 +50,10 @@ export default function Index({ featured }) {
 import axios from "axios";
 
 export async function getStaticProps() {
-  
+
   try {
+
+    // get featured projects
     let res = await axios.post("https://firestore.googleapis.com/v1/projects/fogeinator/databases/(default)/documents:runQuery", {
       structuredQuery: {
         from: [{ collectionId: "projects" }],
@@ -69,7 +74,7 @@ export async function getStaticProps() {
         },
       },
     });
-    
+
     let featured = res.data.map(doc => {
       Object.keys(doc.document.fields).forEach(key => {
         doc.document.fields[key] = doc.document.fields[key].stringValue;
@@ -77,14 +82,18 @@ export async function getStaticProps() {
       return doc.document.fields;
     })
 
+    // get recent blog posts
+    const { getLatestPosts } = require('../lib/serverUtils');
+    let posts = await getLatestPosts(3);
+
     return {
-      props: { featured },
+      props: { featured, posts },
     }
   }
   catch (e) {
-    console.log(e);
+    console.error(e);
     return {
-      props: { featured: {} },
+      props: { featured: [], posts: [] },
     }
   }
 

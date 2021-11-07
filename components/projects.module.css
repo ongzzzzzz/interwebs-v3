@@ -8,16 +8,6 @@
     transition: 0.5s;
 }
 
-.projDiv > h2 p {
-    display: block;
-    transition: all 1s;
-}
-.projDiv > div { 
-    display: none; 
-    transition: all 1s; 
-    color:skyblue; 
-}
-
 .projDiv:hover{ background-color: rgba(0,0,0,0.1); }
 .projDiv:hover h2 { display: none; }
 .projDiv:hover p { display: none; }

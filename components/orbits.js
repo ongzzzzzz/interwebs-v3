@@ -84,6 +84,7 @@ const Mars = () => {
 export default function Orbits({ isMobile, width, percentage }) {
 
     // set percent to be from 0 to 1
+    // 0.21 is from experimentation + lots of console logging
     let realPercent = mapNum(percentage, 0.21, 1 - 0.21, 0, 1)
 
     // let t = -(1 + Math.min(Math.max( realPercent , 0), 1)) * Math.PI;
