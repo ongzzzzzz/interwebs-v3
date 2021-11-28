@@ -7,7 +7,6 @@ import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons'
 import { NextSeo } from 'next-seo';
 
 export default function Projects({ projects }) {
-    console.log(projects)
 
     return (
         <div>
