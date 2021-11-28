@@ -13,7 +13,7 @@ export default function Projects({ featured }) {
     return (
         <Fade bottom opposite cascade>
             <div className="flex flex-col w-4/5 md:w-2/3 h-100 relative md:absolute md:bottom-20 md:right-2 mt-4 mx-auto md:m-0">
-                <Link href="/wip"><a className="underline text-md md:text-6xl md:p-5 md:text-right hover:text-blue-500 transition">
+                <Link href="/projects"><a className="underline text-md md:text-6xl md:p-5 md:text-right hover:text-blue-500 transition">
                     Projects <FontAwesomeIcon icon={faExternalLinkAlt} />
                 </a></Link>
                 <div className={`flex h-fit flex-col justify-center md:flex-row md:justify-between`}>
