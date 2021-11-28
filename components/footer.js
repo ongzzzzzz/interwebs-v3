@@ -10,7 +10,7 @@ export default function Footer({}) {
         <div style={{ height: "50px", backgroundColor: "#272727" }}
             className="relative bottom-0 w-full flex flex-row justify-center items-center text-base md:text-2xl text-white">
             <h1 className="text-xs md:text-lg text-right m-2">© 2021 Ong Zhi Zheng</h1>
-            <div className="text-2xl flex flex-row justify-evenly items-center">
+            <div className="text-xl flex flex-row justify-evenly items-center">
                 <Link href="https://github.com/Fogeinator/" target="_blank"><a>
                     <FontAwesomeIcon icon={faGithub} className="m-1 transition hover:text-black" />
                 </a></Link>

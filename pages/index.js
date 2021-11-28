@@ -48,11 +48,9 @@ export default function Index({ featured, posts }) {
 
 
 import axios from "axios";
-
 export async function getStaticProps() {
 
   try {
-
     // get featured projects
     let res = await axios.post("https://firestore.googleapis.com/v1/projects/fogeinator/databases/(default)/documents:runQuery", {
       structuredQuery: {
