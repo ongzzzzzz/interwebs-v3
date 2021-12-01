@@ -53,6 +53,8 @@ export default async (req, res) => {
 	if (!(response.status === 204 || response.status >= 400)) {
 
         const data = await response.json();
+	
+	console.log(data);
 
         if( (data.is_playing) && (data.currently_playing_type != 'ad') ){
 
