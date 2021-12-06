@@ -30,7 +30,7 @@ export default function Header({ }) {
                 <Link href="/blog"><a>
                     Blog
                 </a></Link>
-                <Link href="/wip"><a>
+                <Link href="/projects"><a>
                     Projects
                 </a></Link>
             </div>
