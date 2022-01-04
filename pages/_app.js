@@ -23,6 +23,7 @@ const components = {
   h6: (({ children }) => <h6 className="font-bold my-2 text-xs">{children}</h6>),
   ul: (({ children }) => <ul className="list-disc my-2">{children}</ul>),
   ol: (({ children }) => <ol className="list-decimal my-2">{children}</ol>),
+  blockquote: (({ children }) => <blockquote className="border-8 border-black border-l-blue-500 pl-5 my-2">{children}</blockquote>),
 };
 
 import { DefaultSeo } from 'next-seo';

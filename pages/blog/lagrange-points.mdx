@@ -1,0 +1,438 @@
+import PostLayout from '../../components/post-layout'
+export const meta = {
+  title: 'Parking Spaces in Space',
+  author: 'ongzz',
+  length: '60000',
+  img: '/static/lagrange-points/5-points-illuminati.png',
+  date: "02-01-2022",
+  blurb: "A deep dive into Lagrange Points",
+  tags: ["math", "science"]
+}
+export default ({ children }) => <PostLayout meta={meta}>{children}</PostLayout>
+
+
+# Introduction
+Happy new year everyone! (yes its a late greeting lmao) 
+
+*Anyways*, 2 weeks ago on 24th Dec 2021, NASA launched the James Webb Space Telescope (JWST), to capture the faintest of light sources in the night sky and help us better understand the universe.
+I'm sure everyone has heard of it, or even watched videos about it online 👀👀
+
+There's a lot of sciency stuff to be talked about for the JWST, but in this blog we'll be focusing on its trajectory, and also dive head first deep into the physics governing Lagrange Points!
+
+# The Lagrange points gang
+For people who've watched [YouTube](https://www.youtube.com/watch?v=tnbSIbsF4t4) [videos](https://www.youtube.com/watch?v=aICaAEXDJQQ) about it, you've definitely heard of the term "Lagrange Point L2" before - I certainly have. 
+I've heard of it previously, but never really thought about why it was so - like the whole concept is just **SO MAGICAL**.
+
+> Basically, Lagrange points are points in space where stuff can just "chill" there and orbit together with Earth around the Sun.
+
+There are ***5 such points*** for ANY 2 bodies in orbit, and JWST is currently heading over to the Earth-Sun orbit's `L2` point. 
+*[Many space probes](https://en.wikipedia.org/wiki/List_of_objects_at_Lagrange_points#L2) have also been sent here in the past, too.*
+![Lagrange points diagram](/static/lagrange-points/5-points.png)
+![Lagrange points animation](/static/lagrange-points/5-points.gif)
+![Lagrange points animation, again](/static/lagrange-points/5-points-again.gif)
+
+The points `L1`, `L2` and `L3` are all on the same Earth-Sun line, and are considered *unstable points*.
+
+The `L4` and `L5` points form equilateral triangles with the Earth and the Sun, and are considered *stable points*.
+
+# Stability
+Think of their stability like this: a ball can be balanced on top of a hill, but even the slightest gust of wind will blow it down the hill, making the hilltop be in an unstable equilibium.
+However, if you put the ball at the bottom, letting it sit in a pit somewhere, it would be hard to get it out without external force - this would be a stable equilibium.
+
+Beacuse the `L4` and `L5` points are stable, many asteroids naturally clump together here (like how balls naturally roll downhill). 
+These asteroids are called [Trojan asteroids](https://www.nasa.gov/feature/episode-8-we-asked-a-nasa-scientist-what-are-the-trojan-asteroids). 
+Jupiter is famous for having [tons of these](https://en.wikipedia.org/wiki/Jupiter_trojan). (the green ones)
+![Jupiter's trojan asteroids](/static/lagrange-points/jupiter-points.gif)
+
+Conversely, since `L1`, `L2` and `L3` are unstable points, no asteroids are there (but stuff that stays there will still be in equilibium too)
+
+Since `L3` is so far away from the Earth and the Sun, things at the `L3` point, although able to "chill" there, are easily influenced by other stuff in the Solar System, and get pulled away easily. 
+
+And for the `L1` and `L2` points, they are the choices for launching space probes, as mentioned previously! This is because they are:
+- close to Earth
+- far away from asteroids which can crash into them
+
+side note: JWST orbits around the `L2` point in a "halo orbit", which basically means it's periodic. ([some orbits](https://en.wikipedia.org/wiki/Lissajous_orbit) are not usually periodic though!)
+![JWST's orbit around L2](/static/lagrange-points/jwst-l2.gif)
+![JWST's orbit around L2, again](/static/lagrange-points/jwst-l2-again.gif)
+
+# Point L1, the point between 2 worlds
+The `L1` point is between the Sun and Earth, being pulled by both celestial bodies which fix it in place. 
+It would have the same orbital period as the Earth (meaning it orbits along with Earth):
+![L1 diagram animation](/static/lagrange-points/l1-diagram-animation.gif)
+
+Here's a diagram for the `L1` point:
+![L1 diagram](/static/lagrange-points/l1-diagram.png)
+Here, little `m` denotes a "test mass", just like "test charges" when taught in the context of Electricity / Magnetism. Don't worry about it too much though, as you'll see later that the final result won't depend on this `m` anyways.
+
+> Now, our problem is: how do we find the length $r_L$?
+
+From high school, we know that anything in circular motion MUST have a centripetal force: that means that both the Sun and Earth's gravitational pull are making up the centripetal force for something orbiting at L2:
+
+Firstly, we can equate the centripetal force to the resultant force of gravity on the test mass:
+$$
+F_{sun} - F_{earth} = F_{centripetal}
+$$
+
+Then, we can substitute their corresponding equations in:
+$$
+\begin{aligned}
+\frac{G M_S m}{(r_E - r_L)^2} - \frac{G M_E m}{r_L^2} &= \frac{m v^2}{r_E - r_L} \\
+\frac{G M_S \cancel{m}}{(r_E - r_L)^2} - \frac{G M_E \cancel{m}}{r_L^2} &= \frac{\cancel{m}}{r_E - r_L} \cdot \frac{4\pi^2(r_E - r_L)^2}{T^2} \\
+\frac{G M_S}{(r_E - r_L)^2} - \frac{G M_E}{r_L^2} &= \frac{4\pi^2}{T^2} \cdot (r_E - r_L) \\
+\frac{G M_S}{(r_E - r_L)^2} - \frac{G M_E}{r_L^2} &= \frac{4\pi^2}{T^2} r_E \cdot \left(1 - \frac{r_L}{r_E}\right) \\
+\end{aligned}
+$$
+Notice how the test mass `m` cancels out! That means the final `L1` point doesn't depend on how heavy the space probe is.
+
+After that we can use Kepler's third law to simplify the RHS:
+$$ 
+\text{By Kepler's 3rd law, } 
+$$
+$$
+\begin{aligned}
+\frac{4\pi^2}{GM} \cdot r^3 &= T^2 \\
+\frac{4\pi^2}{T^2} \cdot r &= \frac{GM}{r^2}
+\end{aligned}
+$$
+
+Plugging it in the RHS,
+$$
+\begin{aligned}
+\frac{G M_S}{(r_E - r_L)^2} - \frac{G M_E}{r_L^2} &= \frac{G M_S}{r_E^2} \cdot \left(1 - \frac{r_L}{r_E}\right) \\
+\end{aligned}
+$$
+
+Now, the hardest thing to deal with is the $\frac{G M_S}{(r_E - r_L)^2}$ term on the LHS. 
+We can simplify that by using the binomial approximation: 
+$$
+(1+x)^n \approx 1 + nx \text{, for small } x 
+$$
+
+But first, we need to rearrange it to make it into the form we want:
+$$
+\begin{aligned}
+\frac{G M_S}{r_E^2} \cdot \left(1 - \frac{r_L}{r_E}\right)^{-2} - \frac{G M_E}{r_L^2} &= \frac{G M_S}{r_E^2} \cdot \left(1 - \frac{r_L}{r_E}\right) \\
+\end{aligned}
+$$
+
+After that, it's just smooth sailing for solving for $r_L$:
+$$
+\begin{aligned}
+\frac{\cancel{G} M_S}{r_E^2} \cdot \left(1 + 2\frac{r_L}{r_E}\right) - \frac{\cancel{G} M_E}{r_L^2} &\approx \frac{\cancel{G} M_S}{r_E^2} \cdot \left(1 - \frac{r_L}{r_E}\right) \\
+\frac{M_S}{r_E^2} \left[ \left(1 + 2\frac{r_L}{r_E}\right) - \left(1 - \frac{r_L}{r_E}\right) \right] &\approx \frac{M_E}{r_L^2} \\
+\frac{M_S}{r_E^2} \cdot \frac{3r_L}{r_E} &\approx \frac{M_E}{r_L^2} \\
+r_L^3 &\approx \frac{M_E}{3M_S} r_E^3 \\
+r_L &\approx r_E \sqrt[3]{\frac{M_E}{3M_S}}
+\end{aligned}
+$$
+
+For Earth, this value would turn out to be around: $r_{L1} \approx 1.5 \cdot 10^6 \text{km}$ .
+
+# Point L2, the dark twin of L1
+Point `L2` is also pulled by both the Sun and the Earth, but in another location - it's kind of like it's about to escape, but the Sun and the Earth are pulling it back, so it stays there orbiting.
+![L2 diagram](/static/lagrange-points/l2-diagram.png)
+
+The setup is similar to the `L1` case, but both the Sun and the Earth are conspiring to hold the test mass back:
+$$
+F_{sun} + F_{earth} = F_{centripetal}
+$$
+
+The derivation is then literally the same as the `L1` point:
+$$
+\begin{aligned}
+\frac{G M_S m}{(r_E + r_L)^2} + \frac{G M_E m}{r_L^2} &= \frac{m v^2}{r_E + r_L} \\
+
+\frac{G M_S \cancel{m}}{(r_E + r_L)^2} + \frac{G M_E \cancel{m}}{r_L^2} &= \frac{\cancel{m}}{r_E + r_L} \cdot \frac{4\pi^2(r_E + r_L)^2}{T^2} \\
+
+\frac{G M_S}{r_E^2} \left(1 + \frac{r_L}{r_E} \right)^{-2} + \frac{G M_E}{r_L^2} &= \frac{4\pi^2}{T^2} r_E \cdot \left(1 + \frac{r_L}{r_E}\right) \\
+
+\frac{\cancel{G} M_S}{r_E^2} \left(1 - 2\frac{r_L}{r_E} \right) + \frac{\cancel{G} M_E}{r_L^2} &\approx \frac{\cancel{G} M_S}{r_E^2} \cdot \left(1 + \frac{r_L}{r_E}\right) \\
+
+\frac{M_S}{r_E^2} \left[ \left(1 + \frac{r_L}{r_E}\right) - \left(1 - 2\frac{r_L}{r_E}\right) \right] &\approx \frac{M_E}{r_L^2} \\
+
+\frac{M_S}{r_E^2} \cdot \frac{3r_L}{r_E} &\approx \frac{M_E}{r_L^2} \\
+r_L^3 &\approx \frac{M_E}{3M_S} r_E^3 \\
+r_L &\approx r_E \sqrt[3]{\frac{M_E}{3M_S}}
+\end{aligned}
+$$
+
+> Note that its size is the same as `L1`! 
+
+Also, note that this would be on the other side of the moon ( $r_{L2} \approx 1.5 \cdot 10^6 \text{km}$ , while the Earth-Moon distance is $3.844 \cdot 10^5 \text{km}$ )
+This makes it the choice for JWST, as it needs to shield itself from the Sun's rays so it has both the Earth and the Moon on its back.
+
+# Point L3, the loner
+As stated previously, `L3` is kind of useless because of how far away it is, but some have said that it could be used as a station to detect solar flares and predict solar events before they happen 👀🔥
+![L3 diagram](/static/lagrange-points/l3-diagram.png)
+
+The equation we have is the exact same as `L2`, but accounting for a different length now:
+$$
+\begin{aligned}
+F_{sun} + F_{earth} &= F_{centripetal} \\
+\frac{G M_S m}{(r_L - r_E)^2} - \frac{G M_E m}{r_L^2} &= \frac{m v^2}{r_L - r_E} \\
+\end{aligned}
+$$
+
+Doing the same spiel as before, we get:
+$$
+\begin{aligned}
+\frac{G M_S \cancel{m}}{(r_L - r_E)^2} - \frac{G M_E \cancel{m}}{r_L^2} &= \frac{\cancel{m}}{r_L - r_E} \cdot \frac{4\pi^2(r_L - r_E)^2}{T^2} \\
+\frac{G M_S}{(r_L - r_E)^2} - \frac{G M_E}{r_L^2} &= \frac{4\pi^2}{T^2} (r_L - r_E) \\
+\frac{G M_S}{(r_L - r_E)^2} - \frac{G M_E}{r_L^2} &= \frac{G M_S}{r_E^3} (r_L - r_E) \text{, by Kepler's 3rd law} \\
+\end{aligned}
+$$
+
+Frankly, I was stuck when I got to this point. I couldn't use the binomial approximation as before, as in this setup, $\frac{r_L}{r_E}$ would not be small. 
+Instead, I tried rearranging some stuff around:
+$$
+\begin{aligned}
+\frac{\cancel{G} M_S}{(r_L - r_E)^2} - \frac{\cancel{G} M_E}{r_L^2} &= \frac{\cancel{G} M_S}{r_E^3} (r_L - r_E) \\
+\frac{M_S}{(r_L - r_E)^2} - \frac{M_E}{r_L^2} &= \frac{M_S}{r_E^2} \left(\frac{r_L}{r_E} - 1\right) \\
+\frac{r_L^2}{(r_L - r_E)^2} - \frac{M_E}{M_S} &= \frac{r_L^2}{r_E^2} \left(\frac{r_L}{r_E} - 1\right) \\
+\frac{\frac{r_L}{r_E}^2}{\left(\frac{r_L}{r_E} - 1\right)^2} - \frac{M_E}{M_S} &= \frac{r_L^2}{r_E^2} \left(\frac{r_L}{r_E} - 1\right) \\
+\end{aligned}
+$$
+
+Here, we'll take a substitution: $y = \frac{r_L}{r_E}$
+$$
+\begin{aligned}
+\left(\frac{y}{y - 1}\right)^2 - \frac{M_E}{M_S} &= y^2 (y - 1) \\
+y^2 - \frac{M_E}{M_S}(y-1)^2 &= y^2 (y-1)^3 \\
+\end{aligned}
+$$
+
+Holy smokes, we've turned our problem into a quintic equation! 
+But it's alright: we could use an approximation and solve for the roots by factoring.
+Since $M_E << M_S$, $$\frac{M_E}{M_S} << 1$$, effectively 0.
+
+Hence,
+$$
+\begin{aligned}
+y^2 &\approx y^2 (y-1)^3 \\
+y^2 (1 - (y-1)^3) &\approx 0 \\
+\end{aligned}
+$$
+
+We get $y^2=0$ (which we'll ignore), and $(1 - (y-1)^3) = 0$ . Simplifying, we get:
+$$
+\begin{aligned}
+(y-1)^3 &\approx 1 \\
+y &\approx 2 \\
+\frac{r_L}{r_E} &\approx 2 \\
+r_L &\approx 2r_E
+\end{aligned}
+$$
+
+This means that `L3` is twice as large as $r_E$, and thus is directly opposite the Earth, forever invisible to us Earth dwellers.
+
+# Illuminati confirmed? Points L4 and L5
+![Illuminati confirmed?](/static/lagrange-points/5-points-Illuminati.png)
+??? $\Delta$ ???
+
+In all seriousness though, the points `L4` and `L5` are harder to prove. To understand them better, we need to think more.
+Like literally more, 1 more specifically. Enter: **the restricted 3 body problem**
+
+## The restricted 3 body problem
+So far we've been thinking about the Sun as one big **stationary** mass, with the Earth orbiting around it. This is called a *"one body model"*, or a *"central-force problem"*.
+
+But this is not the case! In reality, the Sun also moves a little too, due to all the forces acting on it. 
+By considering ONLY the Earth and the Sun, this would become a *"2-body problem"*. 
+
+Similarly, since we are treating the Lagrange points as test masses `m`, our problem is actually a *"3-body problem"*, and these are notoriously hard to solve.
+But since the test mass `m` is super tiny, this becomes a *restricted 3 body problem*, of which a solution can be found easily.
+In this restricted 3 body problem, we neglect any influences the test mass would have on the Sun / Earth, and effectively turn this into a 2 body problem.
+
+## Barry's center
+> In a 2 body system, the common point where these celestial bodies orbit about is called a **barycenter**, aka the **center of mass**.
+![Barycenter animation 1](/static/lagrange-points/barycenter1.gif)
+![Barycenter animation 2](/static/lagrange-points/barycenter2.gif)
+![Barycenter animation 3](/static/lagrange-points/barycenter3.gif)
+Isn't it satisfying to see their elegant dances around each other?
+
+![Barycenter diagram](/static/lagrange-points/barycenter-diagram.png)
+Since the barycenter is a center of mass, we can find the length of $r_{CS}$ and $r_{CE}$ by scaling $r_E$ according to their masses:
+$$
+r_{CS} = r_E \cdot \frac{M_E}{M_S + M_E}
+$$
+$$
+r_{CE} = r_E \cdot \frac{M_S}{M_S + M_E}
+$$
+
+In cases `L1`, `L2` and `L3`, because we were considering points on the Earth-Sun line, the barycenter lied on top of the line, and so they orbited around it anyways.
+
+For the `L4` and `L5` points however, since they are not on the Earth-Sun line, we will have to account for this in the following calculations and note that they orbit around the **barycenter**, which is where things start spicing up.
+
+With this idea in mind, we can start proving that `L4` and `L5` points form equilateral triangles.
+
+## Proving Illuminati
+First, we need a diagram.
+Let's imagine the test mass was somewhere out there in space. We'll denote its distance to the Sun and Earth $a$ and $b$ respectively. 
+![L4 L5 diagram 1](/static/lagrange-points/l4-l5-diagram1.png)
+By proving that $a$ and $b$ are equal to $r_E$ , we can show that they form an equilateral triangle. (scroll down for a tl;dr if math scares you)
+
+Now we can start getting our hands dirty. Let's consider the test mass `m` and the Earth.
+
+Because the `L4` and `L5` points orbit together with the Earth, their orbital periods have to be the same. Using $vt=2\pi r$ , we get:
+$$
+\begin{aligned}
+v_L T = 2\pi r_L &\Rightarrow \frac{2\pi}{T} = \frac{v_L}{r_L} \\
+v_E T = 2\pi r_{CE} &\Rightarrow \frac{2\pi}{T} = \frac{v_E}{r_{CE}} \\
+\therefore \frac{v_L}{r_L} &= \frac{v_E}{r_{CE}} \\
+\frac{v_L}{r_L} &= \frac{v_E}{r_E} \left(1 + \frac{M_E}{M_S} \right) ~~~~~ (1)
+\end{aligned}
+$$
+
+So we've now got an equation relating their velocities and radii... but we don't want velocities! We just want to find their radii, so we need to do some ***MATH***.
+
+Specifically, we're going to find 2 other equations with $v_E$ and $v_L$ to use, so that we can eliminate them in the equation above. (think simultaneous equations)
+One way we could do that is by considering their centripetal forces - and equate them with the forces constituting their gravitational attraction.
+
+For Earth, this would look like:
+$$
+\begin{aligned}
+F_{sun} &= F_{centripetal} \\
+\frac{G M_S M_E}{r_E^2} &= \frac{M_E v_E^2}{r_{CE}} \\
+\frac{G M_S}{r_E^2} &= \frac{v_E^2}{r_E} \left(1 + \frac{M_E}{M_S}\right) \\
+\frac{G M_S}{r_E} &= v_E^2 \left(1 + \frac{M_E}{M_S}\right) ~~~~~ (2)
+\end{aligned}
+$$
+
+For the test mass `m` at the Lagrange point, because it's being pulled by both the Earth and the Sun, we must break both gravitational forces into their components, so let's add some angle labels in our diagram:
+![L4 L5 diagram 2](/static/lagrange-points/l4-l5-diagram2.png)
+
+Then, since the gravitational force makes up the centripetal force for the Lagrange point, we can find an equation for the test mass' centripetal force:
+![L4 L5 diagram vertical forces](/static/lagrange-points/l4-l5-vert.png)
+
+$$
+\begin{aligned}
+F_{centripetal} &= F_{sun, \parallel} + F_{earth, \parallel} \\
+\frac{m v_L^2}{r_L} &= F_{sun} \cos \alpha + F_{earth} \cos \beta \\
+\frac{v_L^2}{r_L} &= \frac{G M_S}{a^2} \cos(\alpha) + \frac{G M_E}{b^2} \cos(\beta) ~~~~~ (3)
+\end{aligned}
+$$
+
+Now, we can start combining equations together:
+$$
+\begin{aligned}
+\frac{v_L^2}{r_L^2} &= \frac{v_E^2}{r_E^2} \left(1 + \frac{M_E}{M_S} \right)^2 ~~~~~ (1)^2 \\
+\frac{v_L^2}{r_L^2} \cdot \frac{r_E^2}{\left(1 + \frac{M_E}{M_S} \right)} &= v_E^2 \left(1 + \frac{M_E}{M_S} \right) \\
+\text{using } (2), ~~~~~ \frac{v_L^2}{r_L^2} \cdot \frac{r_E^2}{\left(1 + \frac{M_E}{M_S} \right)} &= \frac{G M_S}{r_E} \\
+\end{aligned}
+$$
+
+Further simplifying,
+$$
+\begin{aligned}
+\frac{v_L^2}{r_L^2} \cdot \frac{r_E^2}{\left(1 + \frac{M_E}{M_S} \right)} &= \frac{G M_S}{r_E} \\
+\frac{v_L^2}{r_L^2} &= \frac{G M_S}{r_E^3} \left(1 + \frac{M_E}{M_S} \right) \\
+\frac{v_L^2}{r_L} &= \frac{G M_S}{r_E^3} r_L \left(1 + \frac{M_E}{M_S} \right) \\
+\text{using } (3), ~~~~~ \frac{G M_S}{a^2} \cos \alpha + \frac{G M_E}{b^2} \cos \beta &= \frac{G M_S}{r_E^3} r_L \left(1 + \frac{M_E}{M_S} \right) \\
+\frac{\cancel{G} M_S}{a^2} \cos \alpha + \frac{\cancel{G} M_E}{b^2} \cos \beta &= \frac{\cancel{G} M_S}{r_E^3} r_L \left(1 + \frac{M_E}{M_S} \right) \\
+\frac{\cos \alpha}{a^2}  + \frac{M_E}{M_S} \frac{\cos \beta}{b^2} &= \frac{r_L}{r_E^3}  \left(1 + \frac{M_E}{M_S} \right) ~~~~~ (4)
+\end{aligned}
+$$
+
+Phew! That was a lot to unpack, hope you're still doing fine! We're almost at the end.
+
+One more thing to note is that for the test mass to be at equilibium, it should ***NOT*** be moving horizontally - this means that the other components of the gravitational force should cancel out, i.e.:
+![L4 L5 diagram horizontal forces](/static/lagrange-points/l4-l5-hor.png)
+
+$$
+\begin{aligned}
+F_{sun, \perp} &= F_{earth, \perp} \\
+F_{sun} \sin \alpha &= F_{earth} \sin \beta \\
+\frac{M_S}{a^2} \sin \alpha &= \frac{M_E}{b^2} \sin \beta \\
+\frac{M_E}{M_S} &= \frac{b^2}{a^2} \cdot \frac{\sin \alpha}{\sin \beta} ~~~~~ (5)
+\end{aligned}
+$$
+
+Putting this into the LHS of $(4)$ ,
+$$
+\begin{aligned}
+\frac{\cos \alpha}{a^2}  + \frac{M_E}{M_S} \frac{\cos \beta}{b^2} &= \frac{r_L}{r_E^3}  \left(1 + \frac{M_E}{M_S} \right) \\
+\frac{\cos \alpha}{a^2}  + \frac{\sin \alpha}{a^2} \frac{\cos \beta}{\sin \beta} &= \frac{r_L}{r_E^3}  \left(1 + \frac{M_E}{M_S} \right) ~~~~~ (6)
+\end{aligned}
+$$
+
+Now, remember what $r_{CE}$ was?
+![Barycenter diagram](/static/lagrange-points/barycenter-diagram.png)
+$$
+\begin{aligned}
+r_{CE} &= r_E \cdot \frac{M_S}{M_S + M_E} \\ 
+r_{CE} &= r_E \cdot \frac{1}{1 + \frac{M_E}{M_S}} \\
+1 + \frac{M_E}{M_S} &= \frac{r_E}{r_{CE}} \\
+\end{aligned}
+$$
+
+Now putting THAT into equation $(6)$ , everything starts looking cleaner:
+$$
+\begin{aligned}
+\frac{\cos \alpha}{a^2}  + \frac{\sin \alpha}{a^2} \frac{\cos \beta}{\sin \beta} &= \frac{r_L}{r_E^3}  \left(1 + \frac{M_E}{M_S} \right) \\
+\frac{\cos \alpha}{a^2}  + \frac{\sin \alpha}{a^2} \frac{\cos \beta}{\sin \beta} &= \frac{1}{r_E^2}  \frac{r_L}{r_{CE}} ~~~~~ (7)
+\end{aligned}
+$$
+
+Using the $\sin$ addition formula, the LHS becomes:
+$$
+\begin{aligned}
+\frac{\cos \alpha}{a^2}  + \frac{\sin \alpha}{a^2} \frac{\cos \beta}{\sin \beta} &= \frac{1}{r_E^2}  \frac{r_L}{r_{CE}} \\
+\frac{1}{a^2 \sin \beta} ( \sin\beta \cos \alpha  + \sin \alpha \cos \beta ) &= \frac{1}{r_E^2}  \frac{r_L}{r_{CE}} \\
+\frac{1}{a^2 \sin \beta} ( \sin(\alpha + \beta) ) &= \frac{1}{r_E^2}  \frac{r_L}{r_{CE}} \\
+\frac{1}{a^2 \sin \beta} ( \sin L ) &= \frac{1}{r_E^2} \frac{r_L}{r_{CE}} ~~~~~ (8)
+\end{aligned}
+$$
+*From here on, I'll denote angles by their symbols at the vertex, with $L$ representing the Lagrange point.*
+
+![L4 L5 diagram 2](/static/lagrange-points/l4-l5-diagram2.png)
+From our diagram, we can apply the sine rule and do some ✨geometry✨ to find what $\frac{r_L}{r_{CE}}$ is:
+$$
+\begin{aligned}
+\text{From } \Delta ECL, ~~~~~ & \\
+\frac{\sin \beta}{r_{CE}} &= \frac{\sin E}{r_L} \\
+\frac{r_L}{r_{CE}} &= \frac{\sin E}{\sin \beta} \\
+\end{aligned}
+$$
+
+Alright, we'll put this back into equation $(8)$ :
+$$
+\begin{aligned}
+\frac{1}{a^2 \sin(\beta)} ( \sin L ) &= \frac{1}{r_E^2} \frac{r_L}{r_{CE}} \\
+\frac{1}{a^2 \sin(\beta)} ( \sin L ) &= \frac{1}{r_E^2} \frac{\sin E}{\sin \beta} \\
+\frac{r_E^2}{a^2} &= \frac{\sin E}{\sin L} ~~~~~ (9)
+\end{aligned}
+$$
+
+One last step! We'll use the sine rule again to find $\frac{\sin E}{\sin L}$ :
+$$
+\begin{aligned}
+\text{From } \Delta SEL, ~~~~~ & \\
+\frac{\sin \L}{r_E} &= \frac{\sin E}{a} \\
+\frac{\sin E}{\sin L} &= \frac{a}{r_E} \\
+\end{aligned}
+$$
+
+Putting that into equation $(9)$ yields:
+$$
+\begin{aligned}
+\frac{r_E^2}{a^2} &= \frac{\sin E}{\sin L} \\
+\frac{r_E^2}{a^2} &= \frac{a}{r_E} \\
+a^3 &= r_E^3 \\
+a &= r_E
+\end{aligned}
+$$
+
+Isn't that neat?! All that junk from earlier... all those conditions we imposed for the test mass to be at equilibium... produces this simple fact about the system!!
+
+Throughout this process we've only considered the test mass and the Earth - if we were to consider the Sun, we'd get $b = r_E$ too! (source: trust me bro), and this concludes our derivation for the `L4` and `L5` points.
+
+> tl;dr: For an arbitrary point in space orbiting around a common barycenter with the same period as the Earth, it would have to be as far to the Sun and Earth as the Earth is to the Sun, aka form an equilateral triangle!
+
+# Conclusion
+To recap, we've looked at Lagrange points: what they are, and how they were derived. 
+It's just crazy to think that things can orbit around empty space, being held in place by stuff in this vast universe. 
+And even crazier is that we can deduce them from Earth, by using only math and physics!
+
+This is why I love these 2 subjects - take the `L4` and `L5` points for example. We've only applied some conditions for equilibium, and we've then gotten statements that ***MUST*** be true for that to occur.
+
+Anyways, thanks for sticking with me till the end! Feel free to send me any feedback, I'll try to improve!! （￣︶￣）↗ <3

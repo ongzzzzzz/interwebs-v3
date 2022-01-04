@@ -17,13 +17,18 @@ export default async (req, res) => {
         } 
 
         let postData = doc.data();
-        db.collection('blogs').doc(post).set({
-            views: firebaseAdmin.firestore.FieldValue.increment(1)
-        }, {merge: true}).then(() => {
-            res.status(200).json({ views: postData.views+1, likes: postData.likes })
-        })
+        if (process.env.NODE_ENV === 'development') {
+            res.status(200).json({ views: postData.views, likes: postData.likes })
+            return;
+        }
+        else {
+            db.collection('blogs').doc(post).set({
+                views: firebaseAdmin.firestore.FieldValue.increment(1)
+            }, {merge: true}).then(() => {
+                res.status(200).json({ views: postData.views+1, likes: postData.likes })
+            })
+        }
         return;
-        
     } catch (e) {
         console.error(e)
         res.status(400).json({ e });
