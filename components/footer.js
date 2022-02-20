@@ -11,7 +11,7 @@ export default function Footer({}) {
             className="relative bottom-0 w-full flex flex-row justify-center items-center text-base md:text-2xl text-white">
             <h1 className="text-xs md:text-lg text-right m-2">© {new Date().getFullYear()} Ong Zhi Zheng</h1>
             <div className="text-xl flex flex-row justify-evenly items-center">
-                <Link href="https://github.com/Fogeinator/" target="_blank"><a>
+                <Link href="https://github.com/ongzzzzzz/" target="_blank"><a>
                     <FontAwesomeIcon icon={faGithub} className="m-1 transition hover:text-black" />
                 </a></Link>
                 <Link href="https://www.instagram.com/ong.zhi.zheng/" target="_blank"><a>
