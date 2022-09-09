@@ -26,7 +26,7 @@ export default function Footer({}) {
                 <Link href="https://discordapp.com/users/486858222762983425" target="_blank"><a>
                     <FontAwesomeIcon icon={faDiscord} className="m-1 transition hover:text-indigo-600" />
                 </a></Link>
-                <Link href="mailto:hi@ongzz.ml"><a>
+                <Link href="mailto:ongzhizheng@gmail.com"><a>
                     <FontAwesomeIcon icon={faEnvelope} className="m-1 transition hover:text-red-600" />
                 </a></Link>
             </div>
