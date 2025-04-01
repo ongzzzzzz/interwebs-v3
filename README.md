@@ -1,9 +1,16 @@
 ## personal web (3rd iteration)
 
-migrate blog:
-- https://ghost.org/
-- https://medium.datadriveninvestor.com/how-i-received-3750-views-in-my-first-month-of-medium-writing-programming-articles-44a06f0a8a02
-- https://www.freecodecamp.org/news/devblog-launch-your-developer-blog-own-domain/
+
+TODO:
+- migrate blog:
+  - https://ghost.org/
+  - https://medium.datadriveninvestor.com/how-i-received-3750-views-in-my-first-month-of-medium-writing-programming-articles-44a06f0a8a02
+  - https://www.freecodecamp.org/news/devblog-launch-your-developer-blog-own-domain/
+- add CV on the footer
+- add handouts page
+- migrate all replit projects to own page (actually just use github pages)
+
+
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
